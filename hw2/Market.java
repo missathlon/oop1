@@ -14,13 +14,13 @@ public class Market implements MarketBehaviour, QueueBehaviour {
 
     @Override
     public void acceptToMarket(Actor actor) {
-        System.out.println(actor.getName() + " пришел в магазин");
+        System.out.println(actor.getName() + " came to market");
         takeInQueue(actor);
     }
 
     @Override
     public void takeInQueue(Actor actor) {
-        System.out.println(actor.getName() + " встал в очередь");
+        System.out.println(actor.getName() + " got in line");
         this.queue.add(actor);
     }
 
@@ -29,7 +29,7 @@ public class Market implements MarketBehaviour, QueueBehaviour {
         for (Actor actor : queue) {
             if (!actor.isMakeOrder()) {
                 actor.setMakeOrder(true);
-                System.out.println(actor.getName() + " сделал свой заказ");
+                System.out.println(actor.getName() + " made order");
             }
         }
     }
@@ -39,7 +39,7 @@ public class Market implements MarketBehaviour, QueueBehaviour {
         for (Actor actor : queue) {
             if (actor.isMakeOrder()) {
                 actor.setTakeOrder(true);
-                System.out.println(actor.getName() + " получил свой заказ");
+                System.out.println(actor.getName() + " took order");
             }
         }
     }
@@ -54,12 +54,12 @@ public class Market implements MarketBehaviour, QueueBehaviour {
                 repeatOrder = random.nextBoolean();
                 if (repeatOrder) {
                     releasedActors.add(actor);
-                    System.out.println(actor.getName() + " вышел из очереди");
+                    System.out.println(actor.getName() + " left queue");
                 } else {
                     actor.setMakeOrder(false);
                     actor.setTakeOrder(false);
                     repeatInQueue.add(actor);
-                    System.out.println(actor.getName() + " вышел из очереди, но не вышел из магазина");
+                    System.out.println(actor.getName() + " left queue, but didn't leave the market");
                 }
             }
         }
@@ -73,7 +73,7 @@ public class Market implements MarketBehaviour, QueueBehaviour {
     @Override
     public void releaseFromMarket(List<Actor> actors) {
         for (Actor actor : actors) {
-            System.out.println(actor.getName() + " вышел из магазина");
+            System.out.println(actor.getName() + " left the market");
             queue.remove(actor);
         }
     }
